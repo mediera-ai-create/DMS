@@ -26,18 +26,14 @@ jobs:
 
       - name: Build the Web API
         run: |
-          $foldername="DMS"
-          $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
-          dotnet build "${{ github.workspace }}\$($foldername)\$($dir)\DMS.sln"  --configuration Release
+          dotnet build "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\DMS.sln"  --configuration Release
         shell: powershell
         
           
 
       - name: Publish the Web API
         run: |
-          $foldername="DMS"
-          $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
-          dotnet publish "${{ github.workspace }}\$($foldername)\$($dir)\DMS.Api\DMS.Api.csproj"-c Release -o ./published
+          dotnet publish "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\DMS.Api\DMS.Api.csproj"-c Release -o ./published
         shell: powershell
         
 
@@ -92,4 +88,11 @@ jobs:
           Write-Host "Starting IIS..."
           Start-Service -Name 'W3SVC'
         shell: powershell
+
+      - name: Deleting Extracted Folder
+        run: |
+         $iisRoot= "CC:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS"
+         Remove-Item -Path "$($iisRoot)" -Recurse -Force
+        shell: powershell
+        continue-on-error: true
  
