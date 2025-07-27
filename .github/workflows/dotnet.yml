@@ -20,7 +20,7 @@ jobs:
           $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
           $foldername=$zip.Name -replace ".zip",""
           $destpath="C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\$($foldername)"
-          [System.IO.Compression.ZipFile]::ExtractToDirectory($zip.FullName , $destpath)
+          [System.IO.Compression.ZipFile]::ExtractToDirectory($zip.FullName , $destpath,$true)
         shell: powershell
         continue-on-error: true
 
