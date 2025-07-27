@@ -13,24 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         continue-on-error: true
-        
-      - name: ExtractFolder
-        run: |
-          Add-Type -AssemblyName System.IO.Compression.FileSystem
-          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
-          $foldername=$zip.Name -replace ".zip",""
-          $destpath="C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\$($foldername)"
-          [System.IO.Compression.ZipFile]::ExtractToDirectory($zip.FullName , $destpath,$true)
-        shell: powershell
-        continue-on-error: true
-
+      
       - name: Build the Web API
         run: |
           dotnet build "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\DMS.sln"  --configuration Release
         shell: powershell
         
-          
-
       - name: Publish the Web API
         run: |
           dotnet publish "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\DMS.Api\DMS.Api.csproj"-c Release -o ./published
@@ -89,10 +77,5 @@ jobs:
           Start-Service -Name 'W3SVC'
         shell: powershell
 
-      - name: Deleting Extracted Folder
-        run: |
-         $iisRoot= "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS"
-         Remove-Item -Path "$($iisRoot)" -Recurse -Force
-        shell: powershell
-        continue-on-error: true
+   
  
