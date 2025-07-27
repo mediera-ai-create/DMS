@@ -1,0 +1,97 @@
+name: Build and Deploy .NET Core Web API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted  # Make sure you've installed the runner on your Windows server
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        continue-on-error: true
+        
+      - name: ExtractFolder
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi" -Filter *.zip | Select-Object -First 1
+          $foldername=$zip.Name -replace ".zip",""
+          $destpath="C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi\$($foldername)"
+          [System.IO.Compression.ZipFile]::ExtractToDirectory($zip.FullName , $destpath)
+        shell: powershell
+        continue-on-error: true
+
+      - name: Build the Web API
+        run: |
+         $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi" -Filter *.zip | Select-Object -First 1
+          $foldername=$zip.Name -replace ".zip",""
+          $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
+          dotnet build "${{ github.workspace }}\$($foldername)\$($dir)\WebApi.sln"  --configuration Release
+        shell: powershell
+        
+          
+
+      - name: Publish the Web API
+        run: |
+          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi" -Filter *.zip | Select-Object -First 1
+          $foldername=$zip.Name -replace ".zip",""
+          $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
+          dotnet publish "${{ github.workspace }}\$($foldername)\$($dir)\WebApi\WebApi.csproj"-c Release -o ./published
+        shell: powershell
+        
+
+      - name: Create deployment zip
+        run: |
+         cd "${{ github.workspace }}"
+         Compress-Archive -Path ./published/* -DestinationPath ./webapi.zip
+        shell: powershell
+
+      - name: Copy zip to deployment path
+        run: |
+          $zipPath = "${{ github.workspace }}\dmsapi.zip"
+          $destPath = "C:\inetpub\wwwroot\dmsapi\deploy"
+          if (!(Test-Path $destPath)) {
+            New-Item -Path $destPath -ItemType Directory | Out-Null
+          }
+          Copy-Item -Path $zipPath -Destination $destPath -Force
+        shell: powershell
+
+      - name: Stop IIS
+        run: |
+          Write-Host "Stopping IIS..."
+          Stop-Service -Name 'W3SVC' -Force
+        shell: powershell
+        continue-on-error: true
+
+      - name: Deleting Previous Published Folder
+        run: |
+         $iisRoot= "C:\inetpub\wwwroot\dmsapi\dmsapi"
+         Remove-Item -Path "$($iisRoot)" -Recurse -Force
+        shell: powershell
+        continue-on-error: true
+      
+
+      - name: Extract zip to target location
+        run: |
+          $zipPath = "C:\inetpub\wwwroot\dmsapi\deploy\dmsapi.zip"
+          $destPath = "C:\inetpub\wwwroot\dmsapi\dmsapi"
+
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+          if (!(Test-Path -Path $destPath)) {
+            New-Item -Path $destPath -ItemType Directory | Out-Null
+          }
+
+          [System.IO.Compression.ZipFile]::ExtractToDirectory($zipPath, $destPath)
+        shell: powershell
+        continue-on-error: true
+
+      - name: Running IIS
+        run: |
+          Write-Host "Starting IIS..."
+          Start-Service -Name 'W3SVC'
+        shell: powershell
+ 
