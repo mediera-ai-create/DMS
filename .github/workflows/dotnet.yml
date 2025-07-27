@@ -91,7 +91,7 @@ jobs:
 
       - name: Deleting Extracted Folder
         run: |
-         $iisRoot= "CC:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS"
+         $iisRoot= "CC:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS"
          Remove-Item -Path "$($iisRoot)" -Recurse -Force
         shell: powershell
         continue-on-error: true
