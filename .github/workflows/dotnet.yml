@@ -26,8 +26,7 @@ jobs:
 
       - name: Build the Web API
         run: |
-         $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
-          $foldername=$zip.Name -replace ".zip",""
+          $foldername="DMS"
           $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
           dotnet build "${{ github.workspace }}\$($foldername)\$($dir)\DMS.sln"  --configuration Release
         shell: powershell
@@ -36,8 +35,7 @@ jobs:
 
       - name: Publish the Web API
         run: |
-          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
-          $foldername=$zip.Name -replace ".zip",""
+          $foldername="DMS"
           $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
           dotnet publish "${{ github.workspace }}\$($foldername)\$($dir)\DMS.Api\DMS.Api.csproj"-c Release -o ./published
         shell: powershell
