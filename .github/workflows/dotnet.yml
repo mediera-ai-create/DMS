@@ -26,27 +26,27 @@ jobs:
 
       - name: Build the Web API
         run: |
-         $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi" -Filter *.zip | Select-Object -First 1
+         $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
           $foldername=$zip.Name -replace ".zip",""
           $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
-          dotnet build "${{ github.workspace }}\$($foldername)\$($dir)\WebApi.sln"  --configuration Release
+          dotnet build "${{ github.workspace }}\$($foldername)\$($dir)\DMS.sln"  --configuration Release
         shell: powershell
         
           
 
       - name: Publish the Web API
         run: |
-          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi" -Filter *.zip | Select-Object -First 1
+          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
           $foldername=$zip.Name -replace ".zip",""
           $dir = Get-ChildItem -Path "${{ github.workspace }}\$($foldername)" -Directory | Select-Object -First 1
-          dotnet publish "${{ github.workspace }}\$($foldername)\$($dir)\WebApi\WebApi.csproj"-c Release -o ./published
+          dotnet publish "${{ github.workspace }}\$($foldername)\$($dir)\DMS.Api\DMS.Api.csproj"-c Release -o ./published
         shell: powershell
         
 
       - name: Create deployment zip
         run: |
          cd "${{ github.workspace }}"
-         Compress-Archive -Path ./published/* -DestinationPath ./webapi.zip
+         Compress-Archive -Path ./published/* -DestinationPath ./dmsapi.zip
         shell: powershell
 
       - name: Copy zip to deployment path
