@@ -17,9 +17,9 @@ jobs:
       - name: ExtractFolder
         run: |
           Add-Type -AssemblyName System.IO.Compression.FileSystem
-          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi" -Filter *.zip | Select-Object -First 1
+          $zip = Get-ChildItem -Path "C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS" -Filter *.zip | Select-Object -First 1
           $foldername=$zip.Name -replace ".zip",""
-          $destpath="C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\dmsapi\dmsapi\$($foldername)"
+          $destpath="C:\inetpub\wwwroot\dmsapi\actions-runner\dmsapi\DMS\DMS\$($foldername)"
           [System.IO.Compression.ZipFile]::ExtractToDirectory($zip.FullName , $destpath)
         shell: powershell
         continue-on-error: true
