@@ -18,4 +18,10 @@
     <ProjectReference Include="..\DMS.Models\DMS.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="dms.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
