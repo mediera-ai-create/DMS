@@ -30,6 +30,7 @@ namespace DMS.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DealerDto dto)
         {
+            dto.CreatedAt = DateTime.UtcNow; // Set CreatedAt to current time
             var result = await _dealerService.AddAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }

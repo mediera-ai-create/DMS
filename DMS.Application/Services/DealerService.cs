@@ -24,7 +24,9 @@ namespace DMS.Application.Services
                     Name = d.Name,
                     Region = d.Region,
                     Contact = d.Contact,
-                    CreatedAt = d.CreatedAt
+                    CreatedAt = d.CreatedAt,
+                    Location = d.Location ,
+                    CreatedBy=d.CreatedBy// Assuming Location is a property in Dealer
                 })
                 .ToListAsync();
         }
@@ -40,7 +42,10 @@ namespace DMS.Application.Services
                 Name = d.Name,
                 Region = d.Region,
                 Contact = d.Contact,
-                CreatedAt = d.CreatedAt
+                CreatedAt = d.CreatedAt,
+                Location = d.Location,
+                CreatedBy=d.CreatedBy 
+                // Assuming Location is a property in Dealer
             };
         }
 
@@ -51,7 +56,8 @@ namespace DMS.Application.Services
                 Name = dto.Name,
                 Region = dto.Region,
                 Contact = dto.Contact,
-                CreatedAt = dto.CreatedAt
+                CreatedAt = dto.CreatedAt,
+                Location = dto.Location // Assuming Location is a property in Dealer
             };
 
             _context.Dealers.Add(dealer);
@@ -69,7 +75,7 @@ namespace DMS.Application.Services
             dealer.Name = dto.Name;
             dealer.Region = dto.Region;
             dealer.Contact = dto.Contact;
-
+            dealer.CreatedBy = dto.CreatedBy;
             await _context.SaveChangesAsync();
             return dto;
         }
