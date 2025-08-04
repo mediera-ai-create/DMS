@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="connected_db.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="dms.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
