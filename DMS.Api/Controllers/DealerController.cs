@@ -17,12 +17,12 @@ namespace DMS.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll() =>
-            Ok(await _dealerService.GetAllAsync());
+            Ok(await _dealerService.GetAllDealersAsync());
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var dealer = await _dealerService.GetByIdAsync(id);
+            var dealer = await _dealerService.GetByDealerIdAsync(id);
             if (dealer == null) return NotFound();
             return Ok(dealer);
         }
@@ -30,15 +30,14 @@ namespace DMS.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DealerDto dto)
         {
-            dto.CreatedAt = DateTime.UtcNow; // Set CreatedAt to current time
-            var result = await _dealerService.AddAsync(dto);
+            var result = await _dealerService.AddDealerAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] DealerDto dto)
         {
-            var updated = await _dealerService.UpdateAsync(id, dto);
+            var updated = await _dealerService.UpdateDealerAsync(id, dto);
             if (updated == null) return NotFound();
             return Ok(updated);
         }
@@ -46,7 +45,7 @@ namespace DMS.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var deleted = await _dealerService.DeleteAsync(id);
+            var deleted = await _dealerService.DeleteDealerAsync(id);
             if (!deleted) return NotFound();
             return NoContent();
         }

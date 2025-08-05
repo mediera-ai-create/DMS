@@ -1,0 +1,1 @@
+This is the DMS.Infrastructure/Configurations module of the DMS project.

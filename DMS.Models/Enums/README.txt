@@ -1,0 +1,1 @@
+This is the DMS.Domain/Enums module of the DMS project.

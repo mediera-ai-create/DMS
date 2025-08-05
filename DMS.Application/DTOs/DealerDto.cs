@@ -2,13 +2,10 @@
 {
     public class DealerDto
     {
-        public int? Id { get; set; } // For update/delete
+        public int Id { get; set; } // For update/delete
         public required string Name { get; set; }
         public required string Region { get; set; }
         public required string Contact { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public  string Location { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? UpdatedBy { get; set; } // Optional, for tracking updates
+        public DateTime CreatedAt { get; set; }
     }
 }

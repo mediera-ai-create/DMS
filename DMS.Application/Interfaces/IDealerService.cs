@@ -1,13 +1,14 @@
 ﻿using DMS.Application.DTOs;
+using DMS.Models.Entities;
 
 namespace DMS.Application.Interfaces
 {
     public interface IDealerService
     {
-        Task<IEnumerable<DealerDto>> GetAllAsync();
-        Task<DealerDto> GetByIdAsync(int id);
-        Task<DealerDto> AddAsync(DealerDto dealer);
-        Task<DealerDto> UpdateAsync(int id, DealerDto dealer);
-        Task<bool> DeleteAsync(int id);
+        Task<IEnumerable<Dealer>> GetAllDealersAsync();
+        Task<Dealer?> GetByDealerIdAsync(int id);
+        Task<Dealer> AddDealerAsync(DealerDto dealer);
+        Task<Dealer?> UpdateDealerAsync(int id, DealerDto dealer);
+        Task<bool> DeleteDealerAsync(int id);
     }
 }
