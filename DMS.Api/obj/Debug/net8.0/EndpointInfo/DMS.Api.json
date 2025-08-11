@@ -709,22 +709,10 @@
             "description": "OK"
           }
         }
-      }
-    },
-    "/api/Item/dealer/{dealerId}": {
+      },
       "get": {
         "tags": [
           "Item"
-        ],
-        "parameters": [
-          {
-            "name": "dealerId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
         ],
         "responses": {
           "200": {

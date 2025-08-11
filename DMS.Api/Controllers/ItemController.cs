@@ -1,5 +1,6 @@
 ﻿using DMS.Application.DTOs;
 using DMS.Application.Interfaces;
+using DMS.Application.Services;
 using DMS.Application.Services.Pdf;
 using DMS.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -9,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 [Route("api/[controller]")]
 public class ItemController : ControllerBase
 {
-    private readonly IItemService _svc;
+    private readonly IItemService _itemService;
     private readonly IWebHostEnvironment _env;
 
     public ItemController(IItemService svc, IWebHostEnvironment env)
     {
-        _svc = svc;
+        _itemService = svc;
         _env = env;
     }
 
@@ -28,7 +29,7 @@ public class ItemController : ControllerBase
         var attachments = new List<ItemAttachment>();
 
         // create a temporary Item entity to save and get Id (use service, provide empty attachments)
-        var created = await _svc.AddItemAsync(dto, Enumerable.Empty<ItemAttachment>());
+        var created = await _itemService.AddItemAsync(dto, Enumerable.Empty<ItemAttachment>());
 
         var itemFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads", "items", created.Id.ToString());
         if (!Directory.Exists(itemFolder)) Directory.CreateDirectory(itemFolder);
@@ -53,27 +54,31 @@ public class ItemController : ControllerBase
             }
 
             // update item with attachments
-            await _svc.UpdateAsync(created.Id, dto, attachments);
+            await _itemService.UpdateAsync(created.Id, dto, attachments);
         }
 
-        var returned = await _svc.GetByIdAsync(created.Id);
+        var returned = await _itemService.GetByIdAsync(created.Id);
         return CreatedAtAction(nameof(Get), new { id = created.Id }, returned);
     }
 
-    [HttpGet("dealer/{dealerId}")]
-   // public async Task<IActionResult> GetByDealer(int dealerId) => Ok(await _svc.GetByDealerAsync(dealerId));
+    //[HttpGet("dealer/{dealerId}")]
+    // public async Task<IActionResult> GetByDealer(int dealerId) => Ok(await _itemService.GetByDealerAsync(dealerId));
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll() =>
+            Ok(await _itemService.GetAllItemsAsync());
 
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(int id)
     {
-        var item = await _svc.GetByIdAsync(id);
+        var item = await _itemService.GetByIdAsync(id);
         return item == null ? NotFound() : Ok(item);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var ok = await _svc.DeleteAsync(id);
+        var ok = await _itemService.DeleteAsync(id);
         return ok ? NoContent() : NotFound();
     }
 }

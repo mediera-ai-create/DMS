@@ -444,6 +444,16 @@
   },
   {
     "ContainingType": "ItemController",
+    "Method": "GetAll",
+    "RelativePath": "api/Item",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ItemController",
     "Method": "Get",
     "RelativePath": "api/Item/{id}",
     "HttpMethod": "GET",
@@ -469,22 +479,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ItemController",
-    "Method": "Get",
-    "RelativePath": "api/Item/dealer/{dealerId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dealerId",
-        "Type": "",
         "IsRequired": true
       }
     ],
