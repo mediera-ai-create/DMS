@@ -12,4 +12,7 @@
     public int? Dimension1Id { get; set; }
     public int? Dimension2Id { get; set; }
     public int? Dimension3Id { get; set; }
+    public string? Dimension1Value { get; set; }
+    public string? Dimension2Value { get; set; }
+    public string? Dimension3Value { get; set; }
 }

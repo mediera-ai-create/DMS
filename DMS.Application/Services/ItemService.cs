@@ -23,6 +23,9 @@ public class ItemService : IItemService
             Dimension1Id = dto.Dimension1Id,
             Dimension2Id = dto.Dimension2Id,
             Dimension3Id = dto.Dimension3Id,
+            Dimension1Value = dto.Dimension1Value,
+            Dimension2Value = dto.Dimension2Value,
+            Dimension3Value = dto.Dimension3Value,
             CreatedAt = DateTime.UtcNow
         };
 
@@ -50,9 +53,6 @@ public class ItemService : IItemService
             .Include(x => x.Brand)
             .Include(x => x.Category)
             .Include(x => x.MaterialType)
-            .Include(x => x.Dimension1)
-            .Include(x => x.Dimension2)
-            .Include(x => x.Dimension3)
             .Include(x => x.Attachments)
             .FirstOrDefaultAsync(x => x.Id == id);
 
@@ -71,9 +71,9 @@ public class ItemService : IItemService
             Grade = i.Grade,
             HasTestCertificate = i.HasTestCertificate,
             CreatedAt = i.CreatedAt,
-            Dimension1 = i.Dimension1 == null ? null : new DimensionDto { Id = i.Dimension1.Id, Name = i.Dimension1.Name, CreatedAt = i.Dimension1.CreatedAt },
-            Dimension2 = i.Dimension2 == null ? null : new DimensionDto { Id = i.Dimension2.Id, Name = i.Dimension2.Name, CreatedAt = i.Dimension2.CreatedAt },
-            Dimension3 = i.Dimension3 == null ? null : new DimensionDto { Id = i.Dimension3.Id, Name = i.Dimension3.Name, CreatedAt = i.Dimension3.CreatedAt },
+            Dimension1Value = i.Dimension1Value,
+            Dimension2Value = i.Dimension2Value,
+            Dimension3Value = i.Dimension3Value,
             Attachments = i.Attachments.Select(a => new ItemAttachmentDto { Id = a.Id, FileName = a.FileName, FilePath = a.FilePath, FileType = a.FileType, UploadedAt = a.UploadedAt }).ToList()
         };
     }
@@ -132,6 +132,10 @@ public class ItemService : IItemService
         item.Dimension1Id = dto.Dimension1Id;
         item.Dimension2Id = dto.Dimension2Id;
         item.Dimension3Id = dto.Dimension3Id;
+        item.Dimension1Value = dto.Dimension1Value;
+        item.Dimension2Value = dto.Dimension2Value;
+        item.Dimension3Value = dto.Dimension3Value;
+
 
         // add new attachments
         foreach (var a in attachments)

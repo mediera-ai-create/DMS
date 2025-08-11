@@ -26,6 +26,8 @@ namespace DMS.Infrastructure.Data
         public DbSet<Request> Requests { get; set; }
         public DbSet<ItemAttachment> ItemAttachments { get; set; }
 
+        public DbSet<Activity> Activities { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +39,7 @@ namespace DMS.Infrastructure.Data
             modelBuilder.Entity<Sale>().ToTable("Sales");
             modelBuilder.Entity<ServiceAppointment>().ToTable("ServiceAppointments");
             modelBuilder.Entity<JobCard>().ToTable("JobCards");
+            modelBuilder.Entity<Activity>().ToTable("Activities");
 
             modelBuilder.Entity<ServiceAppointment>(entity =>
             {
@@ -165,10 +168,6 @@ namespace DMS.Infrastructure.Data
                 e.HasOne(i => i.Category).WithMany().HasForeignKey(i => i.CategoryId).OnDelete(DeleteBehavior.SetNull);
                 e.HasOne(i => i.MaterialType).WithMany().HasForeignKey(i => i.MaterialTypeId).OnDelete(DeleteBehavior.SetNull);
 
-                e.HasOne(i => i.Dimension1).WithMany().HasForeignKey(i => i.Dimension1Id).OnDelete(DeleteBehavior.SetNull);
-                e.HasOne(i => i.Dimension2).WithMany().HasForeignKey(i => i.Dimension2Id).OnDelete(DeleteBehavior.SetNull);
-                e.HasOne(i => i.Dimension3).WithMany().HasForeignKey(i => i.Dimension3Id).OnDelete(DeleteBehavior.SetNull);
-
             });
 
             // ItemAttachment mapping
@@ -187,6 +186,21 @@ namespace DMS.Infrastructure.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired();
             });
+
+            modelBuilder.Entity<Activity>()
+                .HasOne(a => a.Dealer)
+                .WithMany()
+                .HasForeignKey(a => a.DealerId);
+
+            modelBuilder.Entity<Activity>()
+                .HasOne(a => a.Request)
+                .WithMany()
+                .HasForeignKey(a => a.RequestId);
+
+            modelBuilder.Entity<Activity>()
+                .HasOne(a => a.Item)
+                .WithMany()
+                .HasForeignKey(a => a.ItemId);
         }
     }
 }

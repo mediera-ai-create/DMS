@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\DMS\\DMS_Mediera\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|d:\\dms\\dms_mediera\\dms.api\\controllers\\requestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|solutionrelative:dms.api\\controllers\\requestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A473AB58-CD00-4DBE-9652-706A4EF70AE2}|DMS.Infrastructure\\DMS.Infrastructure.csproj|d:\\dms\\dms_mediera\\dms.infrastructure\\data\\dmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A473AB58-CD00-4DBE-9652-706A4EF70AE2}|DMS.Infrastructure\\DMS.Infrastructure.csproj|solutionrelative:dms.infrastructure\\data\\dmsdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|d:\\dms\\dms_mediera\\dms.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|solutionrelative:dms.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|d:\\dms\\dms_mediera\\dms.api\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|solutionrelative:dms.api\\controllers\\itemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F36219D9-9F3D-46FC-9C23-63BB72C02255}|DMS.Application\\DMS.Application.csproj|d:\\dms\\dms_mediera\\dms.application\\services\\locationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F36219D9-9F3D-46FC-9C23-63BB72C02255}|DMS.Application\\DMS.Application.csproj|solutionrelative:dms.application\\services\\locationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|d:\\dms\\dms_mediera\\dms.api\\controllers\\activitiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E1775F5-EC27-4320-939B-68C7D057569B}|DMS.Api\\DMS.Api.csproj|solutionrelative:dms.api\\controllers\\activitiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Program.cs",
-              "RelativeDocumentMoniker": "DMS.Api\\Program.cs",
-              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Program.cs",
-              "RelativeToolTip": "DMS.Api\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-11T12:32:17.796Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RequestController.cs",
-              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Controllers\\RequestController.cs",
-              "RelativeDocumentMoniker": "DMS.Api\\Controllers\\RequestController.cs",
-              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Controllers\\RequestController.cs",
-              "RelativeToolTip": "DMS.Api\\Controllers\\RequestController.cs",
+              "Title": "LocationService.cs",
+              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Application\\Services\\LocationService.cs",
+              "RelativeDocumentMoniker": "DMS.Application\\Services\\LocationService.cs",
+              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Application\\Services\\LocationService.cs",
+              "RelativeToolTip": "DMS.Application\\Services\\LocationService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-11T12:32:15.827Z",
+              "WhenOpened": "2025-08-11T14:08:48.789Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DmsDbContext.cs",
-              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Infrastructure\\Data\\DmsDbContext.cs",
-              "RelativeDocumentMoniker": "DMS.Infrastructure\\Data\\DmsDbContext.cs",
-              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Infrastructure\\Data\\DmsDbContext.cs",
-              "RelativeToolTip": "DMS.Infrastructure\\Data\\DmsDbContext.cs",
-              "ViewState": "AgIAAKMAAAAAAAAAAAAwwL8AAAABAAAAAAAAAA==",
+              "Title": "ItemController.cs",
+              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Controllers\\ItemController.cs",
+              "RelativeDocumentMoniker": "DMS.Api\\Controllers\\ItemController.cs",
+              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Controllers\\ItemController.cs",
+              "RelativeToolTip": "DMS.Api\\Controllers\\ItemController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-11T12:30:59.986Z",
+              "WhenOpened": "2025-08-11T14:03:30.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ActivitiesController.cs",
+              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Controllers\\ActivitiesController.cs",
+              "RelativeDocumentMoniker": "DMS.Api\\Controllers\\ActivitiesController.cs",
+              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Controllers\\ActivitiesController.cs",
+              "RelativeToolTip": "DMS.Api\\Controllers\\ActivitiesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-11T14:03:28.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Program.cs",
+              "RelativeDocumentMoniker": "DMS.Api\\Program.cs",
+              "ToolTip": "D:\\DMS\\DMS_Mediera\\DMS.Api\\Program.cs",
+              "RelativeToolTip": "DMS.Api\\Program.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAowB4AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-11T13:47:44.502Z",
               "EditorCaption": ""
             }
           ]

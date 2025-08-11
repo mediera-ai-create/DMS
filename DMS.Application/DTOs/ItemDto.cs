@@ -13,9 +13,9 @@
     public bool HasTestCertificate { get; set; }
     public DateTime CreatedAt { get; set; }
 
-    public DimensionDto? Dimension1 { get; set; }
-    public DimensionDto? Dimension2 { get; set; }
-    public DimensionDto? Dimension3 { get; set; }
+    public string? Dimension1Value { get; set; }
+    public string? Dimension2Value { get; set; }
+    public string? Dimension3Value { get; set; }
 
     public List<ItemAttachmentDto> Attachments { get; set; } = new();
 }

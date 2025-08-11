@@ -3,6 +3,7 @@ using System;
 using DMS.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DMS.Infrastructure.Migrations
 {
     [DbContext(typeof(DmsDbContext))]
-    partial class DmsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250811133229_AddActivityEntity")]
+    partial class AddActivityEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
@@ -302,20 +305,11 @@ namespace DMS.Infrastructure.Migrations
                     b.Property<int?>("Dimension1Id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Dimension1Value")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("Dimension2Id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Dimension2Value")
-                        .HasColumnType("TEXT");
-
                     b.Property<int?>("Dimension3Id")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Dimension3Value")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Grade")
                         .IsRequired()
@@ -344,6 +338,12 @@ namespace DMS.Infrastructure.Migrations
                     b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("Dimension1Id");
+
+                    b.HasIndex("Dimension2Id");
+
+                    b.HasIndex("Dimension3Id");
 
                     b.HasIndex("MaterialTypeId");
 
@@ -689,6 +689,21 @@ namespace DMS.Infrastructure.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("Dimension", "Dimension1")
+                        .WithMany()
+                        .HasForeignKey("Dimension1Id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Dimension", "Dimension2")
+                        .WithMany()
+                        .HasForeignKey("Dimension2Id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Dimension", "Dimension3")
+                        .WithMany()
+                        .HasForeignKey("Dimension3Id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("MaterialType", "MaterialType")
                         .WithMany()
                         .HasForeignKey("MaterialTypeId")
@@ -697,6 +712,12 @@ namespace DMS.Infrastructure.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
+
+                    b.Navigation("Dimension1");
+
+                    b.Navigation("Dimension2");
+
+                    b.Navigation("Dimension3");
 
                     b.Navigation("MaterialType");
                 });
