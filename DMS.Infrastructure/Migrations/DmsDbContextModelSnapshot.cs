@@ -17,6 +17,44 @@ namespace DMS.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
 
+            modelBuilder.Entity("Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address1")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GSTIN")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands", (string)null);
+                });
+
             modelBuilder.Entity("Campaign", b =>
                 {
                     b.Property<int>("Id")
@@ -93,7 +131,6 @@ namespace DMS.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -155,6 +192,36 @@ namespace DMS.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
+            modelBuilder.Entity("Dimension", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("Diameter")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("Length")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("Thickness")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal?>("Width")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dimensions", (string)null);
+                });
+
             modelBuilder.Entity("Feedback", b =>
                 {
                     b.Property<int>("Id")
@@ -183,6 +250,115 @@ namespace DMS.Infrastructure.Migrations
                     b.HasIndex("DealerId");
 
                     b.ToTable("Feedbacks", (string)null);
+                });
+
+            modelBuilder.Entity("Item", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Dimension1Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Dimension2Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("Dimension3Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Grade")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("HasTestCertificate")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ItemCategory")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("MaterialTypeId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MaterialTypeName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("Dimension1Id");
+
+                    b.HasIndex("Dimension2Id");
+
+                    b.HasIndex("Dimension3Id");
+
+                    b.HasIndex("MaterialTypeId");
+
+                    b.ToTable("Items", (string)null);
+                });
+
+            modelBuilder.Entity("ItemAttachment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("ItemAttachments", (string)null);
+                });
+
+            modelBuilder.Entity("ItemCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItemCategories", (string)null);
                 });
 
             modelBuilder.Entity("JobCard", b =>
@@ -246,6 +422,21 @@ namespace DMS.Infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Leads", (string)null);
+                });
+
+            modelBuilder.Entity("MaterialType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MaterialTypes", (string)null);
                 });
 
             modelBuilder.Entity("ProductMovement", b =>
@@ -406,6 +597,62 @@ namespace DMS.Infrastructure.Migrations
                     b.Navigation("Dealer");
                 });
 
+            modelBuilder.Entity("Item", b =>
+                {
+                    b.HasOne("Brand", "Brand")
+                        .WithMany("Items")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("ItemCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Dimension", "Dimension1")
+                        .WithMany()
+                        .HasForeignKey("Dimension1Id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Dimension", "Dimension2")
+                        .WithMany()
+                        .HasForeignKey("Dimension2Id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Dimension", "Dimension3")
+                        .WithMany()
+                        .HasForeignKey("Dimension3Id")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("MaterialType", "MaterialType")
+                        .WithMany()
+                        .HasForeignKey("MaterialTypeId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Brand");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Dimension1");
+
+                    b.Navigation("Dimension2");
+
+                    b.Navigation("Dimension3");
+
+                    b.Navigation("MaterialType");
+                });
+
+            modelBuilder.Entity("ItemAttachment", b =>
+                {
+                    b.HasOne("Item", "Item")
+                        .WithMany("Attachments")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
             modelBuilder.Entity("JobCard", b =>
                 {
                     b.HasOne("ServiceAppointment", "ServiceAppointment")
@@ -477,9 +724,19 @@ namespace DMS.Infrastructure.Migrations
                     b.Navigation("JobCard");
                 });
 
+            modelBuilder.Entity("Brand", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("DMS.Models.Entities.Customer", b =>
                 {
                     b.Navigation("Leads");
+                });
+
+            modelBuilder.Entity("Item", b =>
+                {
+                    b.Navigation("Attachments");
                 });
 #pragma warning restore 612, 618
         }

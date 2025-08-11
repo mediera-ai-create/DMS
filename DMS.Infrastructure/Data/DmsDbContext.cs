@@ -19,6 +19,13 @@ namespace DMS.Infrastructure.Data
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
 
+        public DbSet<ItemCategory> ItemCategories { get; set; }
+        public DbSet<Dimension> Dimensions { get; set; }
+        public DbSet<MaterialType> MaterialTypes { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<ItemAttachment> ItemAttachments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -119,7 +126,61 @@ namespace DMS.Infrastructure.Data
                 entity.HasOne(f => f.Customer).WithMany().HasForeignKey(f => f.CustomerId);
             });
 
+            // ItemCategory
+            modelBuilder.Entity<ItemCategory>(e =>
+            {
+                e.ToTable("ItemCategories");
+                e.HasKey(x => x.Id);
+                e.Property(x => x.Name).IsRequired();
+            });
 
+            // Dimension
+            modelBuilder.Entity<Dimension>(e =>
+            {
+                e.ToTable("Dimensions");
+                e.HasKey(x => x.Id);
+            });
+
+            // MaterialType
+            modelBuilder.Entity<MaterialType>(e =>
+            {
+                e.ToTable("MaterialTypes");
+                e.HasKey(x => x.Id);
+                e.Property(x => x.Name).IsRequired();
+            });
+
+            // Brand mapping (if not already)
+            modelBuilder.Entity<Brand>(e =>
+            {
+                e.ToTable("Brands");
+                e.HasKey(x => x.Id);
+            });
+
+            // Item mapping
+            modelBuilder.Entity<Item>(e =>
+            {
+                e.ToTable("Items");
+                e.HasKey(x => x.Id);
+
+                e.HasOne(i => i.Brand).WithMany(b => b.Items).HasForeignKey(i => i.BrandId).OnDelete(DeleteBehavior.SetNull);
+                e.HasOne(i => i.Category).WithMany().HasForeignKey(i => i.CategoryId).OnDelete(DeleteBehavior.SetNull);
+                e.HasOne(i => i.MaterialType).WithMany().HasForeignKey(i => i.MaterialTypeId).OnDelete(DeleteBehavior.SetNull);
+
+                e.HasOne(i => i.Dimension1).WithMany().HasForeignKey(i => i.Dimension1Id).OnDelete(DeleteBehavior.SetNull);
+                e.HasOne(i => i.Dimension2).WithMany().HasForeignKey(i => i.Dimension2Id).OnDelete(DeleteBehavior.SetNull);
+                e.HasOne(i => i.Dimension3).WithMany().HasForeignKey(i => i.Dimension3Id).OnDelete(DeleteBehavior.SetNull);
+
+            });
+
+            // ItemAttachment mapping
+            modelBuilder.Entity<ItemAttachment>(entity =>
+            {
+                entity.ToTable("ItemAttachments");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FileName).IsRequired();
+                entity.Property(e => e.FilePath).IsRequired();
+                entity.HasOne(a => a.Item).WithMany(i => i.Attachments).HasForeignKey(a => a.ItemId).OnDelete(DeleteBehavior.Cascade);
+            });
         }
     }
 }

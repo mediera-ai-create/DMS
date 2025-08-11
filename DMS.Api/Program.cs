@@ -23,6 +23,13 @@ builder.Services.AddScoped<ILeadService, LeadService>();
 builder.Services.AddScoped<ICampaignService, CampaignService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IFeedbackService, FeedbackService>();
+builder.Services.AddScoped<IItemCategoryService, ItemCategoryService>();
+builder.Services.AddScoped<IDimensionService, DimensionService>();
+builder.Services.AddScoped<IMaterialTypeService, MaterialTypeService>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IItemService, ItemService>();
+builder.Services.AddHttpClient<ILocationService, LocationService>();
+
 
 builder.Services.AddDbContext<DmsDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
