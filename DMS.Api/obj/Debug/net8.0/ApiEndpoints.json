@@ -309,6 +309,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DimensionController",
+    "Method": "Create",
+    "RelativePath": "api/Dimension",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "DimensionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DimensionController",
+    "Method": "GetAll",
+    "RelativePath": "api/Dimension",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DimensionController",
+    "Method": "Get",
+    "RelativePath": "api/Dimension/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FeedbackController",
     "Method": "AddFeedback",
     "RelativePath": "api/Feedback",
