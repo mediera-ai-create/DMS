@@ -18,13 +18,12 @@ namespace DMS.Infrastructure.Data
         public DbSet<Lead> Leads { get; set; }
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
-
         public DbSet<ItemCategory> ItemCategories { get; set; }
         public DbSet<Dimension> Dimensions { get; set; }
         public DbSet<MaterialType> MaterialTypes { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Item> Items { get; set; }
-
+        public DbSet<Request> Requests { get; set; }
         public DbSet<ItemAttachment> ItemAttachments { get; set; }
 
 
@@ -180,6 +179,13 @@ namespace DMS.Infrastructure.Data
                 entity.Property(e => e.FileName).IsRequired();
                 entity.Property(e => e.FilePath).IsRequired();
                 entity.HasOne(a => a.Item).WithMany(i => i.Attachments).HasForeignKey(a => a.ItemId).OnDelete(DeleteBehavior.Cascade);
+            });
+
+            modelBuilder.Entity<Request>(entity =>
+            {
+                entity.ToTable("Requests");
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name).IsRequired();
             });
         }
     }

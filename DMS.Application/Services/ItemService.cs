@@ -71,9 +71,9 @@ public class ItemService : IItemService
             Grade = i.Grade,
             HasTestCertificate = i.HasTestCertificate,
             CreatedAt = i.CreatedAt,
-            Dimension1 = i.Dimension1 == null ? null : new DimensionDto { Id = i.Dimension1.Id, Size = i.Dimension1.Size, Thickness = i.Dimension1.Thickness, Length = i.Dimension1.Length, Width = i.Dimension1.Width, Diameter = i.Dimension1.Diameter, CreatedAt = i.Dimension1.CreatedAt },
-            Dimension2 = i.Dimension2 == null ? null : new DimensionDto { Id = i.Dimension2.Id, Size = i.Dimension2.Size, Thickness = i.Dimension2.Thickness, Length = i.Dimension2.Length, Width = i.Dimension2.Width, Diameter = i.Dimension2.Diameter, CreatedAt = i.Dimension2.CreatedAt },
-            Dimension3 = i.Dimension3 == null ? null : new DimensionDto { Id = i.Dimension3.Id, Size = i.Dimension3.Size, Thickness = i.Dimension3.Thickness, Length = i.Dimension3.Length, Width = i.Dimension3.Width, Diameter = i.Dimension3.Diameter, CreatedAt = i.Dimension3.CreatedAt },
+            Dimension1 = i.Dimension1 == null ? null : new DimensionDto { Id = i.Dimension1.Id, Name = i.Dimension1.Name, CreatedAt = i.Dimension1.CreatedAt },
+            Dimension2 = i.Dimension2 == null ? null : new DimensionDto { Id = i.Dimension2.Id, Name = i.Dimension2.Name, CreatedAt = i.Dimension2.CreatedAt },
+            Dimension3 = i.Dimension3 == null ? null : new DimensionDto { Id = i.Dimension3.Id, Name = i.Dimension3.Name, CreatedAt = i.Dimension3.CreatedAt },
             Attachments = i.Attachments.Select(a => new ItemAttachmentDto { Id = a.Id, FileName = a.FileName, FilePath = a.FilePath, FileType = a.FileType, UploadedAt = a.UploadedAt }).ToList()
         };
     }

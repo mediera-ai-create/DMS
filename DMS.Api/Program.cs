@@ -29,7 +29,7 @@ builder.Services.AddScoped<IMaterialTypeService, MaterialTypeService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddHttpClient<ILocationService, LocationService>();
-
+builder.Services.AddHttpClient<IRequestService, RequestService>();
 
 builder.Services.AddDbContext<DmsDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))

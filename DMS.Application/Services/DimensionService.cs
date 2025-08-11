@@ -13,11 +13,8 @@ public class DimensionService : IDimensionService
     {
         var e = new Dimension
         {
-            Size = dto.Size,
-            Thickness = dto.Thickness,
-            Length = dto.Length,
-            Width = dto.Width,
-            Diameter = dto.Diameter
+            Name = dto.Name
+            
         };
         _context.Add(e);
         await _context.SaveChangesAsync();
@@ -32,12 +29,7 @@ public class DimensionService : IDimensionService
             .Select(d => new DimensionDto
             {
                 Id = d.Id,
-                Size = d.Size,
-                Thickness = d.Thickness,
-                Length = d.Length,
-                Width = d.Width,
-                Diameter = d.Diameter,
-                CreatedAt = d.CreatedAt
+                Name = d.Name
             }).ToListAsync();
     }
 
@@ -48,11 +40,7 @@ public class DimensionService : IDimensionService
         return new DimensionDto
         {
             Id = d.Id,
-            Size = d.Size,
-            Thickness = d.Thickness,
-            Length = d.Length,
-            Width = d.Width,
-            Diameter = d.Diameter,
+            Name = d.Name,
             CreatedAt = d.CreatedAt
         };
     }
