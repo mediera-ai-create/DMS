@@ -17,5 +17,5 @@
     public string? Dimension2Value { get; set; }
     public string? Dimension3Value { get; set; }
 
-    public List<ItemAttachmentDto> Attachments { get; set; } = new();
+    public string Attachments { get; set; } = string.Empty;
 }

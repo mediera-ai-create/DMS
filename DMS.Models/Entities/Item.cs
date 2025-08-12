@@ -19,7 +19,7 @@
     public string MaterialTypeName { get; set; } = string.Empty; // optional copy
     public string Grade { get; set; } = string.Empty;
     public bool HasTestCertificate { get; set; } = false;
-    public ICollection<ItemAttachment> Attachments { get; set; } = new List<ItemAttachment>();
+    public string Attachments { get; set; } = string.Empty;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

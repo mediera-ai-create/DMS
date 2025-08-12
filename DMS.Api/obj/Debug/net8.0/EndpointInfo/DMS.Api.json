@@ -741,108 +741,19 @@
         ],
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "DealerId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "BrandId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "CategoryId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "MaterialTypeId": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "Name": {
-                    "type": "string"
-                  },
-                  "Grade": {
-                    "type": "string"
-                  },
-                  "HasTestCertificate": {
-                    "type": "boolean"
-                  },
-                  "Dimension1Id": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "Dimension2Id": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "Dimension3Id": {
-                    "type": "integer",
-                    "format": "int32"
-                  },
-                  "Dimension1Value": {
-                    "type": "string"
-                  },
-                  "Dimension2Value": {
-                    "type": "string"
-                  },
-                  "Dimension3Value": {
-                    "type": "string"
-                  },
-                  "files": {
-                    "type": "array",
-                    "items": {
-                      "type": "string",
-                      "format": "binary"
-                    }
-                  }
-                }
-              },
-              "encoding": {
-                "DealerId": {
-                  "style": "form"
-                },
-                "BrandId": {
-                  "style": "form"
-                },
-                "CategoryId": {
-                  "style": "form"
-                },
-                "MaterialTypeId": {
-                  "style": "form"
-                },
-                "Name": {
-                  "style": "form"
-                },
-                "Grade": {
-                  "style": "form"
-                },
-                "HasTestCertificate": {
-                  "style": "form"
-                },
-                "Dimension1Id": {
-                  "style": "form"
-                },
-                "Dimension2Id": {
-                  "style": "form"
-                },
-                "Dimension3Id": {
-                  "style": "form"
-                },
-                "Dimension1Value": {
-                  "style": "form"
-                },
-                "Dimension2Value": {
-                  "style": "form"
-                },
-                "Dimension3Value": {
-                  "style": "form"
-                },
-                "files": {
-                  "style": "form"
-                }
+                "$ref": "#/components/schemas/ItemCreateDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCreateDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCreateDto"
               }
             }
           }
@@ -2409,6 +2320,73 @@
             "format": "int32"
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ItemCreateDto": {
+        "type": "object",
+        "properties": {
+          "dealerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "materialTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "grade": {
+            "type": "string",
+            "nullable": true
+          },
+          "hasTestCertificate": {
+            "type": "boolean"
+          },
+          "dimension1Id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dimension2Id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dimension3Id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "dimension1Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "dimension2Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "dimension3Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "attachments": {
             "type": "string",
             "nullable": true
           }

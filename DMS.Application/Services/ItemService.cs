@@ -9,7 +9,7 @@ public class ItemService : IItemService
     private readonly DmsDbContext _context;
     public ItemService(DmsDbContext context) => _context = context;
 
-    public async Task<ItemDto> AddItemAsync(ItemCreateDto dto, IEnumerable<ItemAttachment> attachments)
+    public async Task<ItemDto> AddItemAsync(ItemCreateDto dto)
     {
         var item = new Item
         {
@@ -26,19 +26,20 @@ public class ItemService : IItemService
             Dimension1Value = dto.Dimension1Value,
             Dimension2Value = dto.Dimension2Value,
             Dimension3Value = dto.Dimension3Value,
+            Attachments = dto.Attachments,
             CreatedAt = DateTime.UtcNow
         };
 
         _context.Items.Add(item);
         await _context.SaveChangesAsync();
 
-        foreach (var a in attachments)
-        {
-            a.ItemId = item.Id;
-            _context.ItemAttachments.Add(a);
-        }
+        //foreach (var a in attachments)
+        //{
+        //    a.ItemId = item.Id;
+        //    _context.ItemAttachments.Add(a);
+        //}
 
-        await _context.SaveChangesAsync();
+        //await _context.SaveChangesAsync();
         var result = await GetByIdAsync(item.Id);
         return result!;
     }
@@ -74,7 +75,7 @@ public class ItemService : IItemService
             Dimension1Value = i.Dimension1Value,
             Dimension2Value = i.Dimension2Value,
             Dimension3Value = i.Dimension3Value,
-            Attachments = i.Attachments.Select(a => new ItemAttachmentDto { Id = a.Id, FileName = a.FileName, FilePath = a.FilePath, FileType = a.FileType, UploadedAt = a.UploadedAt }).ToList()
+            Attachments = i.Attachments
         };
     }
 
@@ -112,15 +113,15 @@ public class ItemService : IItemService
         if (item == null) return false;
 
         // delete files from disk if needed (controller could handle) - here we remove DB records
-        _context.ItemAttachments.RemoveRange(item.Attachments);
+        //_context.ItemAttachments.RemoveRange(item.Attachments);
         _context.Items.Remove(item);
         await _context.SaveChangesAsync();
         return true;
     }
 
-    public async Task<bool> UpdateAsync(int id, ItemCreateDto dto, IEnumerable<ItemAttachment> attachments)
+    public async Task<bool> UpdateAsync(int id, ItemCreateDto dto)
     {
-        var item = await _context.Items.Include(i => i.Attachments).FirstOrDefaultAsync(i => i.Id == id);
+        var item = await _context.Items.FirstOrDefaultAsync(i => i.Id == id);
         if (item == null) return false;
 
         item.BrandId = dto.BrandId;
@@ -135,14 +136,15 @@ public class ItemService : IItemService
         item.Dimension1Value = dto.Dimension1Value;
         item.Dimension2Value = dto.Dimension2Value;
         item.Dimension3Value = dto.Dimension3Value;
+        item.Attachments = dto.Attachments;
 
 
         // add new attachments
-        foreach (var a in attachments)
-        {
-            a.ItemId = item.Id;
-            _context.ItemAttachments.Add(a);
-        }
+        //foreach (var a in attachments)
+        //{
+        //    a.ItemId = item.Id;
+        //    _context.ItemAttachments.Add(a);
+        //}
 
         await _context.SaveChangesAsync();
         return true;

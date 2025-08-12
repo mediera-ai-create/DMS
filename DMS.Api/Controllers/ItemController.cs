@@ -21,41 +21,41 @@ public class ItemController : ControllerBase
 
     [HttpPost]
     [RequestSizeLimit(50_000_000)] // ~50MB adjust as necessary
-    public async Task<IActionResult> Create([FromForm] ItemCreateDto dto, List<IFormFile>? files)
+    public async Task<IActionResult> Create(ItemCreateDto dto)
     {
         // Save files temporarily in a folder (we don't have itemId yet) - better pattern: save after item created
         // We'll first create an empty item, then save files to folder and attach them.
 
-        var attachments = new List<ItemAttachment>();
+        //var attachments = new List<ItemAttachment>();
 
-        // create a temporary Item entity to save and get Id (use service, provide empty attachments)
-        var created = await _itemService.AddItemAsync(dto, Enumerable.Empty<ItemAttachment>());
+        //// create a temporary Item entity to save and get Id (use service, provide empty attachments)
+        var created = await _itemService.AddItemAsync(dto);
 
-        var itemFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads", "items", created.Id.ToString());
-        if (!Directory.Exists(itemFolder)) Directory.CreateDirectory(itemFolder);
+        //var itemFolder = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads", "items", created.Id.ToString());
+        //if (!Directory.Exists(itemFolder)) Directory.CreateDirectory(itemFolder);
 
-        if (files != null && files.Any())
-        {
-            foreach (var file in files)
-            {
-                var fileName = $"{Guid.NewGuid():N}_{Path.GetFileName(file.FileName)}";
-                var filePath = Path.Combine(itemFolder, fileName);
-                using var fs = new FileStream(filePath, FileMode.Create);
-                await file.CopyToAsync(fs);
+        //if (files != null && files.Any())
+        //{
+        //    foreach (var file in files)
+        //    {
+        //        var fileName = $"{Guid.NewGuid():N}_{Path.GetFileName(file.FileName)}";
+        //        var filePath = Path.Combine(itemFolder, fileName);
+        //        using var fs = new FileStream(filePath, FileMode.Create);
+        //        await file.CopyToAsync(fs);
 
-                var relPath = $"/uploads/items/{created.Id}/{fileName}";
-                attachments.Add(new ItemAttachment
-                {
-                    FileName = file.FileName,
-                    FilePath = relPath,
-                    FileType = file.ContentType,
-                    UploadedAt = DateTime.UtcNow
-                });
-            }
+        //        var relPath = $"/uploads/items/{created.Id}/{fileName}";
+        //        attachments.Add(new ItemAttachment
+        //        {
+        //            FileName = file.FileName,
+        //            FilePath = relPath,
+        //            FileType = file.ContentType,
+        //            UploadedAt = DateTime.UtcNow
+        //        });
+        //    }
 
-            // update item with attachments
-            await _itemService.UpdateAsync(created.Id, dto, attachments);
-        }
+        //    // update item with attachments
+            await _itemService.UpdateAsync(created.Id, dto);
+        //}
 
         var returned = await _itemService.GetByIdAsync(created.Id);
         return CreatedAtAction(nameof(Get), new { id = created.Id }, returned);

@@ -464,74 +464,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "DealerId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "BrandId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "CategoryId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "MaterialTypeId",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Grade",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "HasTestCertificate",
-        "Type": "System.Boolean",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dimension1Id",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dimension2Id",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dimension3Id",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dimension1Value",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dimension2Value",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Dimension3Value",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "files",
-        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
-        "IsRequired": false
+        "Name": "dto",
+        "Type": "ItemCreateDto",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

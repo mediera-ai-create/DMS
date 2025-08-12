@@ -177,7 +177,7 @@ namespace DMS.Infrastructure.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.FileName).IsRequired();
                 entity.Property(e => e.FilePath).IsRequired();
-                entity.HasOne(a => a.Item).WithMany(i => i.Attachments).HasForeignKey(a => a.ItemId).OnDelete(DeleteBehavior.Cascade);
+                //entity.HasOne(a => a.Item).WithMany(i => i.Attachments).HasForeignKey(a => a.ItemId).OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Request>(entity =>
