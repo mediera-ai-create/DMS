@@ -7,13 +7,13 @@ namespace DMS.Models.Entities
         public int Id { get; set; }
 
         public int DealerId { get; set; }
-        public required Dealer Dealer { get; set; }
+        public required string DealerName { get; set; }
 
         public int RequestId { get; set; }
-        public required Request Request { get; set; }
+        public required string RequestName { get; set; }
         public required string UserId { get; set; } 
         public int ItemId { get; set; }
-        public required Item Item { get; set; }
+        public required string ItemName { get; set; }
 
         public required string AdditionalFiles { get; set; } // Comma-separated file paths or JSON array
 
@@ -24,5 +24,8 @@ namespace DMS.Models.Entities
         public DateTime? NextFollowUpDate { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public Dealer? Dealer { get; set; }
+        public Request? Request { get; set; }
+        public Item? Item { get; set; }
     }
 }

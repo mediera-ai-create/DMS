@@ -44,9 +44,9 @@ public class ItemService : IItemService
         return result!;
     }
 
-    public async Task<IEnumerable<Dealer>> GetAllItemsAsync()
+    public async Task<IEnumerable<Item>> GetAllItemsAsync()
     {
-        return await _context.Dealers.ToListAsync();
+        return await _context.Items.ToListAsync();
     }
     public async Task<ItemDto?> GetByIdAsync(int id)
     {

@@ -5,7 +5,6 @@ using DMS.Application.DTOs;
 using DMS.Application.Interfaces;
 using DMS.Models.Entities;
 using DMS.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace DMS.Application.Services
 {
@@ -21,27 +20,18 @@ namespace DMS.Application.Services
         public async Task<IEnumerable<Activity>> GetAllActivitiesAsync()
         {
             return await _context.Activities
-                .Include(a => a.Dealer)
-                .Include(a => a.Request)
-                .Include(a => a.Item)
                 .ToListAsync();
         }
 
         public async Task<Activity?> GetActivityByIdAsync(int id)
         {
             return await _context.Activities
-                .Include(a => a.Dealer)
-                .Include(a => a.Request)
-                .Include(a => a.Item)
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
         public async Task<Activity?> GetActivityByUserIdAsync(string userId)
         {
             return await _context.Activities
-                .Include(a => a.Dealer)
-                .Include(a => a.Request)
-                .Include(a => a.Item)
                 .FirstOrDefaultAsync(a => a.UserId == userId);
         }
 
@@ -57,12 +47,12 @@ namespace DMS.Application.Services
             var activity = new Activity
             {
                 DealerId = dto.DealerId,
-                Dealer = dealer,
+                DealerName = dealer.Name,
                 UserId = dto.UserId,
                 RequestId = dto.RequestId,
-                Request = request,
+                RequestName = request.Name,
                 ItemId = dto.ItemId,
-                Item = item,
+                ItemName = item.Name,
                 AdditionalFiles = dto.AdditionalFiles,
                 Remarks = dto.Remarks,
                 PhotoPath = dto.PhotoPath,
@@ -78,11 +68,20 @@ namespace DMS.Application.Services
         {
             var activity = await _context.Activities.FindAsync(id);
             if (activity == null) return null;
+            var dealer = await _context.Dealers.FindAsync(dto.DealerId);
+            var request = await _context.Requests.FindAsync(dto.RequestId);
+            var item = await _context.Items.FindAsync(dto.ItemId);
+
+            if (dealer == null || request == null || item == null)
+                throw new InvalidOperationException("Dealer, Request, or Item not found.");
 
             activity.DealerId = dto.DealerId;
+            activity.DealerName = dealer.Name;
             activity.UserId = dto.UserId;
             activity.RequestId = dto.RequestId;
+            activity.RequestName = request.Name;
             activity.ItemId = dto.ItemId;
+            activity.ItemName = item.Name;
             activity.AdditionalFiles = dto.AdditionalFiles;
             activity.Remarks = dto.Remarks;
             activity.PhotoPath = dto.PhotoPath;

@@ -5,13 +5,13 @@ public class Sale
     public int Id { get; set; }
 
     public int ProductId { get; set; }
-    public Product Product { get; set; }
+    public Product? Product { get; set; }
 
     public int DealerId { get; set; }
-    public Dealer Dealer { get; set; }
+    public Dealer? Dealer { get; set; }
 
     public int CustomerId { get; set; }
-    public Customer Customer { get; set; }
+    public Customer? Customer { get; set; }
 
     public required string Status { get; set; } // Booked, Approved, Invoiced, Delivered
     public decimal QuotationAmount { get; set; }
