@@ -54,7 +54,7 @@ public class ItemService : IItemService
             .Include(x => x.Brand)
             .Include(x => x.Category)
             .Include(x => x.MaterialType)
-            .Include(x => x.Attachments)
+            //.Include(x => x.Attachments)
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (i == null) return null;
