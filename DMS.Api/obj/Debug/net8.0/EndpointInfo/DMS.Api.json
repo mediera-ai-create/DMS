@@ -130,6 +130,28 @@
         }
       }
     },
+    "/api/Activities/{userid}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "userid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Brand": {
       "post": {
         "tags": [
@@ -2082,7 +2104,8 @@
         "required": [
           "additionalFiles",
           "photoPath",
-          "remarks"
+          "remarks",
+          "userId"
         ],
         "type": "object",
         "properties": {
@@ -2113,6 +2136,10 @@
           "nextFollowUpDate": {
             "type": "string",
             "format": "date-time",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
             "nullable": true
           }
         },

@@ -36,6 +36,15 @@ namespace DMS.Application.Services
                 .FirstOrDefaultAsync(a => a.Id == id);
         }
 
+        public async Task<Activity?> GetActivityByUserIdAsync(string userId)
+        {
+            return await _context.Activities
+                .Include(a => a.Dealer)
+                .Include(a => a.Request)
+                .Include(a => a.Item)
+                .FirstOrDefaultAsync(a => a.UserId == userId);
+        }
+
         public async Task<Activity> AddActivityAsync(ActivityDto dto)
         {
             var dealer = await _context.Dealers.FindAsync(dto.DealerId);
@@ -49,6 +58,7 @@ namespace DMS.Application.Services
             {
                 DealerId = dto.DealerId,
                 Dealer = dealer,
+                UserId = dto.UserId,
                 RequestId = dto.RequestId,
                 Request = request,
                 ItemId = dto.ItemId,
@@ -70,6 +80,7 @@ namespace DMS.Application.Services
             if (activity == null) return null;
 
             activity.DealerId = dto.DealerId;
+            activity.UserId = dto.UserId;
             activity.RequestId = dto.RequestId;
             activity.ItemId = dto.ItemId;
             activity.AdditionalFiles = dto.AdditionalFiles;

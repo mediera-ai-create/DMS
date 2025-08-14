@@ -79,6 +79,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DMS.API.Controllers.ActivitiesController",
+    "Method": "GetByUserId",
+    "RelativePath": "api/Activities/{userid}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userid",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BrandController",
     "Method": "Create",
     "RelativePath": "api/Brand",

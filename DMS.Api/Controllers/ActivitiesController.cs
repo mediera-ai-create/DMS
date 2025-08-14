@@ -23,14 +23,20 @@ namespace DMS.API.Controllers
             return Ok(activities);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
             var activity = await _service.GetActivityByIdAsync(id);
             if (activity == null) return NotFound();
             return Ok(activity);
         }
-
+        [HttpGet("{userid}")]
+        public async Task<IActionResult> GetByUserId(string userid)
+        {
+            var activity = await _service.GetActivityByUserIdAsync(userid);
+            if (activity == null) return NotFound();
+            return Ok(activity);
+        }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ActivityDto dto)
         {
